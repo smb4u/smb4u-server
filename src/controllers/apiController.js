@@ -62,7 +62,7 @@ const sellItem = (soldItemObjRaw, res) => {
                 category: soldItemObj.category,
                 price: soldItemObj.price,
                 QRcode: soldItemObj.QRcode,
-                check: soldItemObj.sell,
+                check: soldItemObj.check,
                 url: foundItem[1].url
             };
             const options = {
@@ -99,7 +99,7 @@ const getInventory = (req, res) => {
         if(err){
             console.log(err);
         }
-        console.log('getting all documents');
+        //console.log('getting all documents');
       //  const documents = {
       //      inventory: result,
       //      headers: {

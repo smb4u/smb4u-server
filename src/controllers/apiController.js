@@ -63,7 +63,7 @@ const sellItem = (soldItemObjRaw, res) => {
                 price: soldItemObj.price,
                 QRcode: soldItemObj.QRcode,
                 check: soldItemObj.sell,
-                url: foundItem.url
+                url: foundItem[1].url
             };
             const options = {
                 database: 'itemwise',

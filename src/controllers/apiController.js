@@ -46,7 +46,7 @@ const sellItem = (soldItemObj, callback) => {
         collectionName: 'items'
     };
 
-    mLab.listDocuments(options1, (err, soldItemObj) => {
+    mLab.listDocuments(options1, (err, listOfDocuments) => {
         if(err){
             console.log(err);
         }
@@ -58,7 +58,7 @@ const sellItem = (soldItemObj, callback) => {
             QRcode: soldItemObj.QRcode,
             check: soldItemObj.sell
         };
-        imageController.findItem(soldItemObj.url, result, (err, foundItem) => {
+        imageController.findItem(soldItemObj.url, listOfDocuments, (err, foundItem) => {
             const options = {
                 database: 'itemwise',
                 collectionName: 'items',

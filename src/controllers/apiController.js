@@ -53,17 +53,18 @@ const sellItem = (soldItemObjRaw, res) => {
             console.log(err);
         }
         console.log('getting all documents');
-        const updateItemObj = {
-            description: soldItemObj.description,
-            category: soldItemObj.category,
-            price: soldItemObj.price,
-            QRcode: soldItemObj.QRcode,
-            check: soldItemObj.sell
-        };
         console.log(imageController, soldItemObj);
         console.log('this should have a url:, ', soldItemObj.url);
         imageController.findItem(soldItemObj.url, listOfDocuments, (err, foundItem) => {
             console.log('the found item is:', foundItem);
+            const updateItemObj = {
+                description: soldItemObj.description,
+                category: soldItemObj.category,
+                price: soldItemObj.price,
+                QRcode: soldItemObj.QRcode,
+                check: soldItemObj.sell,
+                url: foundItem.url
+            };
             const options = {
                 database: 'itemwise',
                 collectionName: 'items',

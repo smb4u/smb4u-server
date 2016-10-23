@@ -1,0 +1,38 @@
+{
+  "name": "pg-server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "babel src -d prod",
+    "start": "node prod/server.js",
+    "server": "nodemon server.js",
+    "lint": "eslint --quiet server/ && eslint --quiet client/",
+    "build:dev": "babel src -d dev",
+    "dev": "babel --watch src -d dev & nodemon dev/server.js",
+    "foreverserver": "npm run build && forever start prod/server.js"
+  },
+  "dependencies": {
+    "async": "^2.0.1",
+    "babel-cli": "^6.10.1",
+    "babel-preset-es2015": "^6.9.0",
+    "bluebird": "^3.4.1",
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "cron": "^1.1.0",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "fetch": "^1.1.0",
+    "forever": "^0.15.2",
+    "morgan": "~1.6.1",
+    "request": "^2.73.0"
+  },
+  "devDependencies": {
+    "dotenv": "^2.0.0",
+    "eslint": "^3.1.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-react": "^5.2.2",
+    "nodemon": "^1.9.2",
+    "wait.for": "^0.6.6"
+  }
+}

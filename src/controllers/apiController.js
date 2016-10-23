@@ -46,10 +46,25 @@ const soldItem = (soldItemObj, callback) => {
 //const addingItem = (req,res) => {
   //  fetch(baseLink_users + mongoDB_API_KEY, )
 //};
+const getInventory = (req, res) => {
+    const options = {
+        database: 'itemwise',
+        collectionName: 'items'
+    };
+
+    mLab.listDocuments(options, (err, result) => {
+        if(err){
+            console.log(err);
+        }
+        console.log('getting all documents');
+        res.send(result);
+    });
+}
 
 export default {
     addItem,
     returnItem,
     updateItem,
-    soldItem
+    soldItem,
+    getInventory
 };

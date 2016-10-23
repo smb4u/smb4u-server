@@ -60,7 +60,7 @@ const getInventory = (req, res) => {
         const documents = {
             inventory: result
         };
-        console.log(document);
+        console.log(documents);
         res.send(JSON.stringify(documents));
     });
 }

@@ -1,6 +1,7 @@
 import Jimp from 'jimp';
 
 const scanImage = (imagePath, callback) => {
+    console.log(imagePath, 'this is the image path being scanned');
     Jimp.read(imagePath, (err, image) => {
         if(err){
             console.log(err);
@@ -17,8 +18,8 @@ const compareImage = (jImage1, image2, threshold, callback) => {
         if(err){
             console.log(err);
         }
-        console.log(jImage2 + 'is the JIMP image');
-        console.log(jImage1 + ' is the JIMP image');
+        console.log(jImage2 + 'is the JIMP image2');
+        console.log(jImage1 + ' is the JIMP image1');
         console.log('the image is:', image2);
         const diff = Jimp.diff(jImage1, jImage2, threshold);
         const tuple = [diff.percent, image2];

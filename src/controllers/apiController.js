@@ -100,7 +100,7 @@ const getInventory = (req, res) => {
       //      }
       //  };
         console.log(result);
-        res.send(JSON.stringify(result));
+        res.send(result);
     });
 };
 

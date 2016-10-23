@@ -43,7 +43,10 @@ const sellItem = (soldItemObjRaw, res) => {
     const soldDate = new Date();
     const options1 = {
         database: 'itemwise',
-        collectionName: 'items'
+        collectionName: 'items',
+        query: {
+            check: 'Add'
+        }
     };
     console.log('the passed object is ', soldItemObjRaw.body);
     const soldItemObj = soldItemObjRaw.body;

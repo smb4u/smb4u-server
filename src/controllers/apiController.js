@@ -1,6 +1,7 @@
 // place holder.
 import mongoHelpers from '../database/documents/helpers.js';
 import dotenv from 'dotenv';
+import imageController from './imageController';
 dotenv.load();
 const mongoDB_API_KEY = process.env.MONGODB_API_KEY;
 const baseLink_users = 'https://api.mlab.com/api/1/databases/itemwise/collections/users?apiKey=';
@@ -38,7 +39,7 @@ const updateItem = (updatedItemObj, callback) => {
     mongoHelpers.updateItem({QRcode: returnedItemObj.QRcode}, {$set: {url: updatedItemObj.url, category: updatedItemObj.category, description: updatedItemObj.description, price: updatedItemObj.price}}, callback);
 };
 
-const soldItem = (soldItemObj, callback) => {
+const sellItem = (soldItemObj, callback) => {
     const soldDate = new Date();
     mongoHelpers.updateItem({QRcode: soldItemObj.QRcode}, {$set: {soldDate: soldDate}}, callback);
 };
@@ -69,6 +70,6 @@ export default {
     addItem,
     returnItem,
     updateItem,
-    soldItem,
+    sellItem,
     getInventory
 };

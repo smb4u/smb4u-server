@@ -23,6 +23,7 @@
     "express": "~4.13.1",
     "fetch": "^1.1.0",
     "forever": "^0.15.2",
+    "jimp": "^0.2.27",
     "mongolab-data-api": "^1.1.6",
     "mongoose": "4.1.0",
     "morgan": "~1.6.1",

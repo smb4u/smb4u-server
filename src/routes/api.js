@@ -6,6 +6,7 @@ const router = Router();
 
 router.route('/saveItem').post(apiController.addItem);
 router.route('/getInventory').get(apiController.getInventory);
+router.route('/sellItem').post(apiController.sellItem);
 //router.route('/addItem').post(apiController.addingItem);
 
 export default router;

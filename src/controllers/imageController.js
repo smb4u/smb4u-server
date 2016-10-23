@@ -17,7 +17,8 @@ const compareImage = (jImage1, image2, threshold, callback) => {
             console.log(err);
         }
         const diff = Jimp.diff(jImage1, jImage2, threshold);
-        callback(null, callback);
+        const tuple = [diff.percent, image2];
+        callback(null, tuple);
     });
 };
 
@@ -31,6 +32,14 @@ const findItem = (targetImage, inventoryList, callback) => {
                 break;
             }
         }
-        
+        const foundItem = diffValues.reduce((memo, curr) => {
+            if(curr[0] < memo[0]){
+                memo = curr;
+            }
+            return memo;
+        });
+        callback(null, foundItem);
     });
-}
+};
+
+export default findItem;

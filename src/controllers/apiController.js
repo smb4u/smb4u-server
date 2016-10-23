@@ -30,14 +30,14 @@ const addItem = (req, res) => {
         res.send('saved in database');
     });
 };
-const returnItem = (returnedItemObj, callback) => {
-    const receivedDate = new Date();
-    mongoHelpers.updateItem({QRcode: returnedItemObj.QRcode}, {$set: {receivedDate: receivedDate, soldDate: null, returned: true}}, callback);
-};
-
-const updateItem = (updatedItemObj, callback) => {
-    mongoHelpers.updateItem({QRcode: returnedItemObj.QRcode}, {$set: {url: updatedItemObj.url, category: updatedItemObj.category, description: updatedItemObj.description, price: updatedItemObj.price}}, callback);
-};
+//const returnItem = (returnedItemObj, callback) => {
+//    const receivedDate = new Date();
+//    mongoHelpers.updateItem({QRcode: returnedItemObj.QRcode}, {$set: {receivedDate: receivedDate, soldDate: null, returned: true}}, callback);
+//};
+//
+//const updateItem = (updatedItemObj, callback) => {
+//    mongoHelpers.updateItem({QRcode: returnedItemObj.QRcode}, {$set: {url: updatedItemObj.url, category: updatedItemObj.category, description: updatedItemObj.description, price: updatedItemObj.price}}, callback);
+//};
 
 const sellItem = (soldItemObj, callback) => {
     const soldDate = new Date();
@@ -94,17 +94,20 @@ const getInventory = (req, res) => {
         }
         console.log('getting all documents');
         const documents = {
-            inventory: result
+            inventory: result,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
         };
         console.log(documents);
         res.send(JSON.stringify(documents));
     });
-}
+};
 
 export default {
     addItem,
-    returnItem,
-    updateItem,
+    //returnItem,
+    //updateItem,
     sellItem,
     getInventory
 };

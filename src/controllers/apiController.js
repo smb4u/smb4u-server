@@ -41,7 +41,12 @@ const updateItem = (updatedItemObj, callback) => {
 
 const sellItem = (soldItemObj, callback) => {
     const soldDate = new Date();
-    mLab.listDocuments(options, (err, soldItemObj) => {
+    const options1 = {
+        database: 'itemwise',
+        collectionName: 'items'
+    };
+
+    mLab.listDocuments(options1, (err, soldItemObj) => {
         if(err){
             console.log(err);
         }

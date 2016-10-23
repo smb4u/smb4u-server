@@ -12,10 +12,14 @@ const scanImage = (imagePath, callback) => {
 const threshold = process.env.IMAGE_THRESHOLD || 0.1;
 
 const compareImage = (jImage1, image2, threshold, callback) => {
-    scanImage(image2, (err, jImage2) => {
+    console.log('second image is this one', image2);
+    scanImage(image2.url, (err, jImage2) => {
         if(err){
             console.log(err);
         }
+        console.log(jImage2 + 'is the JIMP image');
+        console.log(jImage1 + ' is the JIMP image');
+        console.log('the image is:', image2);
         const diff = Jimp.diff(jImage1, jImage2, threshold);
         const tuple = [diff.percent, image2];
         callback(null, tuple);
@@ -23,11 +27,14 @@ const compareImage = (jImage1, image2, threshold, callback) => {
 };
 
 const findItem = (targetImage, inventoryList, callback) => {
+    console.log('this was run');
     const diffValues = [];
     let limit = inventoryList.length;
+    console.log(targetImage + 'dfdfsdfdfdsf');
     scanImage(targetImage, (err, targetJImage) => {
+        console.log('this was run too- this should be JIMP', targetJImage );
         inventoryList.forEach((document, index) => {
-            compareImage(targetJImage, document.url, threshold, (err, result) => {
+            compareImage(targetJImage, document, threshold, (err, result) => {
                 if(err){
                     console.log(err);
                 }
@@ -46,4 +53,8 @@ const findItem = (targetImage, inventoryList, callback) => {
     });
 };
 
-export default findItem;
+export default {
+    findItem,
+    compareImage,
+    scanImage
+};

@@ -39,12 +39,14 @@ const addItem = (req, res) => {
 //    mongoHelpers.updateItem({QRcode: returnedItemObj.QRcode}, {$set: {url: updatedItemObj.url, category: updatedItemObj.category, description: updatedItemObj.description, price: updatedItemObj.price}}, callback);
 //};
 
-const sellItem = (soldItemObj, callback) => {
+const sellItem = (soldItemObjRaw, res) => {
     const soldDate = new Date();
     const options1 = {
         database: 'itemwise',
         collectionName: 'items'
     };
+    console.log('the passed object is ', soldItemObjRaw.body);
+    const soldItemObj = soldItemObjRaw.body;
 
     mLab.listDocuments(options1, (err, listOfDocuments) => {
         if(err){
@@ -58,7 +60,10 @@ const sellItem = (soldItemObj, callback) => {
             QRcode: soldItemObj.QRcode,
             check: soldItemObj.sell
         };
+        console.log(imageController, soldItemObj);
+        console.log('this should have a url:, ', soldItemObj.url);
         imageController.findItem(soldItemObj.url, listOfDocuments, (err, foundItem) => {
+            console.log('the found item is:', foundItem);
             const options = {
                 database: 'itemwise',
                 collectionName: 'items',
@@ -66,6 +71,7 @@ const sellItem = (soldItemObj, callback) => {
                 updateObject: updateItemObj
             };
             mLab.updateDocument(options, (err, result) => {
+                console.log('updating the document');
                 if(err){
                     console.log(err);
                 }
@@ -73,7 +79,7 @@ const sellItem = (soldItemObj, callback) => {
                     result: result,
                     diff: foundItem[0]
                 };
-                callback(null, docs);
+                res.send(docs);
             });
         });
     });

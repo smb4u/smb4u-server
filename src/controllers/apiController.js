@@ -41,7 +41,37 @@ const updateItem = (updatedItemObj, callback) => {
 
 const sellItem = (soldItemObj, callback) => {
     const soldDate = new Date();
-    mongoHelpers.updateItem({QRcode: soldItemObj.QRcode}, {$set: {soldDate: soldDate}}, callback);
+    mLab.listDocuments(options, (err, soldItemObj) => {
+        if(err){
+            console.log(err);
+        }
+        console.log('getting all documents');
+        const updateItemObj = {
+            description: soldItemObj.description,
+            category: soldItemObj.category,
+            price: soldItemObj.price,
+            QRcode: soldItemObj.QRcode,
+            check: soldItemObj.sell
+        };
+        imageController.findItem(soldItemObj.url, result, (err, foundItem) => {
+            const options = {
+                database: 'itemwise',
+                collectionName: 'items',
+                id: foundItem[1]._id.$oid,
+                updateObject: updateItemObj
+            };
+            mLab.updateDocument(options, (err, result) => {
+                if(err){
+                    console.log(err);
+                }
+                var docs = {
+                    result: result,
+                    diff: foundItem[0]
+                };
+                callback(null, docs);
+            });
+        });
+    });
 };
 
 //const addingItem = (req,res) => {

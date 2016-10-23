@@ -31,8 +31,8 @@ const pass = process.env.MONGO_PASS;
 app
     .use(bodyParser.urlencoded({ limit: '50mb', extended: true}))
     .use(bodyParser.json({ limit: '50mb'}))
-    .use(indexRoute)
-    .use(cors());
+    .use(cors())
+    .use(indexRoute);
 
 app.listen(port, err => {
     if(err) console.log(err);

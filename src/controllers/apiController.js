@@ -57,8 +57,11 @@ const getInventory = (req, res) => {
             console.log(err);
         }
         console.log('getting all documents');
-        const documents = JSON.stringify(result);
-        res.send(documents);
+        const documents = {
+            inventory: result
+        };
+        console.log(document);
+        res.send(JSON.stringify(documents));
     });
 }
 

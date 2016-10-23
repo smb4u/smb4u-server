@@ -93,14 +93,14 @@ const getInventory = (req, res) => {
             console.log(err);
         }
         console.log('getting all documents');
-        const documents = {
-            inventory: result,
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            }
-        };
-        console.log(documents);
-        res.send(JSON.stringify(documents));
+      //  const documents = {
+      //      inventory: result,
+      //      headers: {
+      //          'Access-Control-Allow-Origin': '*'
+      //      }
+      //  };
+        console.log(result);
+        res.send(result);
     });
 };
 

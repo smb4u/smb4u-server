@@ -24,21 +24,25 @@ const compareImage = (jImage1, image2, threshold, callback) => {
 
 const findItem = (targetImage, inventoryList, callback) => {
     const diffValues = [];
-    const limit = inventoryList.length;
+    let limit = inventoryList.length;
     scanImage(targetImage, (err, targetJImage) => {
-        while(diffValues.length < limit){
-            diffValues.push(compareImage(targetJImage, inventoryList[i]));
-            if(diffValues.length === limit){
-                break;
-            }
-        }
-        const foundItem = diffValues.reduce((memo, curr) => {
-            if(curr[0] < memo[0]){
-                memo = curr;
-            }
-            return memo;
+        inventoryList.forEach((document, index) => {
+            compareImage(targetJImage, document.url, threshold, (err, result) => {
+                if(err){
+                    console.log(err);
+                }
+                diffValues[index] = result;
+                if(--limit === 0){
+                    const foundItem = diffValues.reduce((memo, curr) => {
+                        if(curr[0] < memo[0]){
+                            memo = curr;
+                        }
+                        return memo;
+                    });
+                    callback(null, foundItem);
+                }
+            });
         });
-        callback(null, foundItem);
     });
 };
 

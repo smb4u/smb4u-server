@@ -106,7 +106,7 @@ const getInventory = (req, res) => {
       //          'Access-Control-Allow-Origin': '*'
       //      }
       //  };
-        console.log(result);
+        //console.log(result);
         res.send(result);
     });
 };

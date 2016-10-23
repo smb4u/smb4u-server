@@ -62,7 +62,7 @@ const sellItem = (soldItemObjRaw, res) => {
                 category: soldItemObj.category,
                 price: soldItemObj.price,
                 QRcode: soldItemObj.QRcode,
-                check: soldItemObj.check,
+                check: 'Sell',
                 url: foundItem[1].url
             };
             const options = {
